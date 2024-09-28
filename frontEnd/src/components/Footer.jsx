@@ -1,13 +1,12 @@
 import React from 'react'
-import { FaLongArrowAltRight } from "react-icons/fa";
 import linkedin from '../assets/linkedin.png'
 
 function Footer() {
   return (
     <div className=' py-16 mx-auto bg-slate-500'>
-        <div className='max-w-[1240px] mx-auto'>
-        <div className='grid lg:grid-cols-5  mx-4 gap-8'>
-            <div className='p-2 col-span-2'>
+        <div className=''>
+        <div className='grid lg:grid-cols-3  gap-8 max-w-[1240px] mx-auto'>
+            <div className='p-2 '>
                 <h1 className='text-2xl font-bold mb-3'>About</h1>
                 <p>I'm full stack developer .I have done a lot of projects.I got invaluable experience from my work.</p>
                 <div className='grid grid-cols-5 gap-4 my-2 py-2'>
@@ -16,6 +15,7 @@ function Footer() {
                     <img src={linkedin} alt="" className='w-[30px]'/>
                 </div>
             </div>
+            <div className='lg:col-span-2 flex justify-between'>
             <div className='p-2'>
                 <h1 className='text-2xl font-bold mb-3'>Links</h1>
                 <ul>
@@ -37,8 +37,6 @@ function Footer() {
                 <p>niceman1234man</p>
                 <p>yihunie</p>
             </div>
-            <div>
-                <h1></h1> 
             </div>
 
         </div>
