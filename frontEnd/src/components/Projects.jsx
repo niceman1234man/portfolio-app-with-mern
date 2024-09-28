@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 function Projects() {
   return (
-    <div className='w-full bg-slate-700 py-16 text-white font-semibold'>
+    <div className='w-full bg-white py-16 text-black font-semibold'>
         <div className='max-w-[1240px] mx-auto' >
         <h1 className='text-center text-3xl'>My Projects</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
