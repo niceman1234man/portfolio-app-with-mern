@@ -4,7 +4,7 @@ import react from '../assets/react.png'
 
 function Skils() {
   return (
-    <div className='py-16 bg-slate-500'>
+    <div className='py-16 bg-black'>
         <div className='max-w-[1240px] mx-auto'>
    
    <h1 className='text-center font-bold text-2xl py-6 my-4'> My Skills</h1>
