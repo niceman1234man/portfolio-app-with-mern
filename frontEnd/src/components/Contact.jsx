@@ -6,7 +6,7 @@ import me2 from '../assets/me2.jpg'
 import linkedin from '../assets/linkedin.png'
 function Contact() {
   return (
-    <div className=' mx-auto w-full bg-amber-200 py-16'>
+    <div className='mx-auto bg-black text-white w-full  py-16'>
         <h1 className='text-2xl text-center p-4 font-bold'>Contact Me</h1>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-8 gap-8'>
         <div className='flex flex-col items-center justify-center'>
@@ -42,17 +42,14 @@ function Contact() {
 
         
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 max-w-[1240px] mx-auto'>
-            <div  className='bg-slate-600 flex justify-center items-center'>
-                <img src={me2} alt="" className='w-[360px] my-4 mx-auto rounded-md ' />
-            </div>
+        <div className=' max-w-[1240px] mx-auto'>
             
-            <form className='flex flex-col bg-white p-8'>
+            <form className='flex flex-col bg-white p-8 rounded-md w-[70%] mx-auto my-6'>
             <input type="text" placeholder='Your Name' className='border border-black m-2 p-2' />
             <input type="email" placeholder='Email' className='border border-black m-2 p-2'/>
             <input type="text" placeholder='Subject' className='border border-black m-2 p-2'/>
             <textarea placeholder='Message' rows={6} className='border border-black m-2 p-2'></textarea>
-            <button type='submit' className='bg-yellow-600 rounded-full w-[150px] p-2 text-center flex items-center justify-center mx-auto text-xl mt-6'>Send Message</button>
+            <button type='submit' className='bg-[#00df9a] w-[200px] rounded-md p-2 text-center flex items-center justify-center mx-auto text-xl mt-6 text-black'>Send Message</button>
             </form>
 
         </div>
