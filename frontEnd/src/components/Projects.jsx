@@ -11,42 +11,33 @@ function Projects() {
         const myrepos = async () => {
             try {
                 const response = await fetch('https://api.github.com/users/niceman1234man/repos');
+                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
+                console.log("Fetched Repositories:", data); // Log fetched data
                 setRepo(data);
             } catch (error) {
                 console.error("Error fetching repositories:", error);
             }
         };
-        myrepos();
+        myrepos(); // calling function
     }, []);
 
     useEffect(() => {
         if (repo.length > 0) {
             const sortedRepos = repo.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            setRecentRepo(sortedRepos.slice(0, 4));
+            setRecentRepo(sortedRepos.slice(0, 4)); // Get the most recent 4 repos
+            console.log("Recent Repositories:", sortedRepos.slice(0, 4)); // Log recent repos
 
-            const fetchLanguages = async () => {
-                const langPromises = sortedRepos.map(async (repository) => {
-                    try {
-                        const langResponse = await fetch(repository.languages_url);
-                        const langData = await langResponse.json();
-                        return { id: repository.id, languages: langData };
-                    } catch (error) {
-                        console.error("Error fetching Languages:", error);
-                        return { id: repository.id, languages: {} }; // Return empty if error
-                    }
-                });
-
-                const languagesData = await Promise.all(langPromises);
-                const languagesObject = languagesData.reduce((acc, { id, languages }) => {
-                    acc[id] = languages;
-                    return acc;
-                }, {});
-
-                setLanguages(languagesObject);
-            };
-
-            fetchLanguages();
+            sortedRepos.forEach(async (repository) => {
+                try {
+                    const lang = await fetch(repository.languages_url);
+                    if (!lang.ok) throw new Error('Network response was not ok');
+                    const langData = await lang.json();
+                    setLanguages((prev) => ({ ...prev, [repository.id]: langData }));
+                } catch (error) {
+                    console.error("Error fetching Languages:", error);
+                }
+            });
         }
     }, [repo]);
 
@@ -75,7 +66,7 @@ function Projects() {
                         <p>Loading Projects.......</p>
                     )}
                 </div>
-                <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 py-2 mx-auto text-black flex justify-center'>See More Projects</button>
+                <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 py-2 mx-auto text-black flex justify-center'><a href="https://github.com/niceman1234man?tab=repositories">See More Projects</a></button>
             </div>
         </div>
     );
