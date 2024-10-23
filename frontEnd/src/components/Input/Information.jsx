@@ -12,11 +12,20 @@ function Information() {
   const [pic, setPic] = useState("");
 
   const [desc, setDesc] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http//localhost')
-    
-  }
+    axios.post('http://localhost:9000/home', home)
+        .then((result) => {
+            console.log(result);
+            alert("Home added successfully");
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("Error adding home");
+        });
+};
+
 
   const handleHome = (e) => {
     const { name, value } = e.target;
@@ -41,8 +50,8 @@ const handleSkill = (e) => {
       <div className='py-4 w-full mx-auto'>
         <h1 className='font-bold text-center p-3'>Home</h1>
         <form className='flex flex-col' onSubmit={handleSubmit}>
-          <input type="text" placeholder='Greatting : Hello !!' className='p-2 border border-black my-2' name='greating' value={home.greating} onChange={handleHome} />
-          <input type="text" placeholder='Title: like Full stack developer...' className='p-2 border border-black my-2' name='title' onChange={handleHome} />
+          <input type="text" placeholder='Greatting : Hello !!' className='p-2 border border-black my-2' name='greating' value={home.greeting} onChange={handleHome} />
+          <input type="text" placeholder='Title: like Full stack developer...' className='p-2 border border-black my-2' value={home.title} name='title' onChange={handleHome} />
           <button type='submit' className='p-2 my-2 bg-cyan-600'>Save</button>
 
         </form>
