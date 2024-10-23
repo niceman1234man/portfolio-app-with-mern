@@ -45,4 +45,4 @@ const Service=mongoose.model('Service',sevice);
 
 
 
-export default {Home,About,Skill};
+export default {Home,About,Skill,Service};
