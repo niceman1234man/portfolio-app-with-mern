@@ -1,12 +1,16 @@
-import express from 'express'
-import {getHome} from '../controller/index.js'
+import express from "express";
+import {
+  getHome,
+  getAbout,
+  getSkill,
+  getService,
+} from "../controller/index.js";
 
+const router = express.Router();
 
-const router=express.Router();
-
-router.post('/',getHome);
-//router.put('/',putHome)
-
-
+router.post("/", getHome);
+router.post("/", getAbout);
+router.post("/", getSkill);
+router.post("/", getService);
 
 export default router;
