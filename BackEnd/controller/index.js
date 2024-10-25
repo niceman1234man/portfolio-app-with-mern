@@ -3,7 +3,7 @@ import Models from "../models/index.js"; // Adjust the path as necessary
 
 const { Home, About, Skill, Service } = Models; // Destructure the models
 
-export const getHome = async (req, res) => {
+export const postHome = async (req, res) => {
   const home = req.body;
   const newHome = new Home(home);
 
@@ -16,7 +16,7 @@ export const getHome = async (req, res) => {
   }
 };
 
-export const getAbout = async (req, res) => {
+export const postAbout = async (req, res) => {
   const about = req.body;
   const newAbout = new About(about);
   try {
@@ -30,7 +30,7 @@ export const getAbout = async (req, res) => {
   }
 };
 
-export const getSkill = async (req, res) => {
+export const postSkill = async (req, res) => {
   const skill = req.body;
   const newSkill = new Skill(skill);
   try {
@@ -44,7 +44,7 @@ export const getSkill = async (req, res) => {
   }
 };
 
-export const getService = async (req, res) => {
+export const postService = async (req, res) => {
   const service = req.body;
   const newService = new Service(service);
   try {
@@ -57,3 +57,97 @@ export const getService = async (req, res) => {
     res.status(500).json({ success: false, message: "server error" });
   }
 };
+
+
+
+export const getAbout=async(req,res)=>{
+  try {
+   const result= await About.find({});
+   res.status(200).json({success:true,data:result});
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,message:"Server Failer",error});
+    
+  }
+
+
+
+}
+
+
+export const getHome=async(req,res)=>{
+  try {
+    const result= await Home.find({});
+    res.status(200).json({success:true,data:result});
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,message:"Server failer"});
+    
+  }
+}
+
+export const getSkill=async(req,res)=>{
+  try {
+    const result=await Skill.find({});
+    res.status(200).json({success:true,data:result});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,mesage:"Server Failer"});
+  }
+}
+
+export const getService=async(req,res)=>{
+  try {
+    const result=await Service.find({});
+    res.status(200).json({success:true,data:result});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,message:"Server Failer"});
+  }
+ 
+}
+
+
+export const updateAbout=async(req,res)=>{
+  try {
+   const result= await About.findByIdAndUpdate({});
+    res.status(200).json({success:true,data:result});
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,mesage:"Server Failer"});
+  }
+}
+
+export const updateHome=async(req,res)=>{
+  try {
+    const result=Home.findByIdAndUpdate({});
+    res.status(200).json({success:true,data:result});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,message:"Server Failer"});
+    
+  }
+}
+
+export const updateSkill=async(req,res)=>{
+  try {
+    const result=Skill.findByIdAndUpdate({});
+    res.status(200).json({success:true,data:result});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,message:"Server Failer"});
+  }
+}
+
+export const updateService=async(req,res)=>{
+  try {
+    const result= Service.findByIdAndUpdate({});
+    res.status(200).json({success:true,data:result});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:true,message:"Server Failer"});
+  }
+}
