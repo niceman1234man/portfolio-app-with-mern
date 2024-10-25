@@ -151,3 +151,23 @@ export const updateService=async(req,res)=>{
     res.status(500).json({success:true,message:"Server Failer"});
   }
 }
+
+export const deleteSkill =async(req,res)=>{
+  try {
+    await Skill.findByIdAndDelete({});
+    res.status(200).json({success:true,message:"Skill deleted successfully"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:true,message:"Server failer"});
+  }
+}
+
+export const deleteService=async(req,res)=>{
+  try {
+    await Service.findByIdAndDelete({});
+    res.status(200).json({success:true,message:"Service deleted successfully"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({success:false,message:"Server Failer"});
+  }
+}
