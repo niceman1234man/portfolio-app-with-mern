@@ -8,7 +8,7 @@ export const postHome = async (req, res) => {
   const newHome = new Home(home);
 
   try {
-    await newHome.save();
+    await newHome.save(); 
     res.status(201).json({ success: true, message: "Added successfully" });
   } catch (error) {
     console.error("Error saving home:", error); // Log the error for debugging
@@ -111,8 +111,10 @@ export const getService=async(req,res)=>{
 
 
 export const updateAbout=async(req,res)=>{
+  const id=req.params;
+  updatedAbout=req.body;
   try {
-   const result= await About.findByIdAndUpdate({});
+   const result= await About.findByIdAndUpdate(id,updatedAbout,{new:true});
     res.status(200).json({success:true,data:result});
 
   } catch (error) {
@@ -122,8 +124,10 @@ export const updateAbout=async(req,res)=>{
 }
 
 export const updateHome=async(req,res)=>{
+  const id=req.params;
+  const updatedHome=req.body;
   try {
-    const result=Home.findByIdAndUpdate({});
+    const result=Home.findByIdAndUpdate(id,updatedHome,{new:true});
     res.status(200).json({success:true,data:result});
   } catch (error) {
     console.log(error);
@@ -133,8 +137,10 @@ export const updateHome=async(req,res)=>{
 }
 
 export const updateSkill=async(req,res)=>{
+  const id=req.params;
+const  updatedSkill=req.body;
   try {
-    const result=Skill.findByIdAndUpdate({});
+    const result=Skill.findByIdAndUpdate(id,updatedSkill,{new:true});
     res.status(200).json({success:true,data:result});
   } catch (error) {
     console.log(error);
@@ -143,8 +149,10 @@ export const updateSkill=async(req,res)=>{
 }
 
 export const updateService=async(req,res)=>{
+  const id=req.params;
+  const updatedService=req.body;
   try {
-    const result= Service.findByIdAndUpdate({});
+    const result= Service.findByIdAndUpdate(id,updatedService,{new:true});
     res.status(200).json({success:true,data:result});
   } catch (error) {
     console.log(error);
@@ -153,8 +161,9 @@ export const updateService=async(req,res)=>{
 }
 
 export const deleteSkill =async(req,res)=>{
+  const id=req.params;
   try {
-    await Skill.findByIdAndDelete({});
+    await Skill.findByIdAndDelete(id);
     res.status(200).json({success:true,message:"Skill deleted successfully"});
   } catch (error) {
     console.log(error);
@@ -163,8 +172,9 @@ export const deleteSkill =async(req,res)=>{
 }
 
 export const deleteService=async(req,res)=>{
+  const id=req.params;
   try {
-    await Service.findByIdAndDelete({});
+    await Service.findByIdAndDelete(id);
     res.status(200).json({success:true,message:"Service deleted successfully"});
   } catch (error) {
     console.log(error);
