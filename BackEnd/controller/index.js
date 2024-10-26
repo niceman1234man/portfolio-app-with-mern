@@ -123,18 +123,23 @@ export const updateAbout=async(req,res)=>{
   }
 }
 
-export const updateHome=async(req,res)=>{
-  const id=req.params;
-  const updatedHome=req.body;
+export const updateHome = async (req, res) => {
+  const { id } = req.params;
+  const updatedHome = req.body;
+
   try {
-    const result=Home.findByIdAndUpdate(id,updatedHome,{new:true});
-    res.status(200).json({success:true,data:result});
+    Home.findOneAndUpdate
+    const result = await Home.findOneAndUpdate(id, updatedHome, { new: true });
+    if (!result) {
+      return res.status(404).json({ success: false, message: "Home not found" });
+    }
+
+    res.status(200).json({ success: true, data: result });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({success:false,message:"Server Failer"});
-    
+    console.error(error); 
+    res.status(500).json({ success: false, message: "Server Failure" });
   }
-}
+};
 
 export const updateSkill=async(req,res)=>{
   const id=req.params;
@@ -174,7 +179,7 @@ export const deleteSkill =async(req,res)=>{
 export const deleteService=async(req,res)=>{
   const id=req.params;
   try {
-    await Service.findByIdAndDelete(id);
+    await Service.findByIdAndDelete(id );
     res.status(200).json({success:true,message:"Service deleted successfully"});
   } catch (error) {
     console.log(error);

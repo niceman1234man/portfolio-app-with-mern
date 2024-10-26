@@ -8,7 +8,7 @@ import {
   getHome,
   getSkill,
   getService,
-
+updateHome,
 } from "../controller/index.js";
 
 const router = express.Router();
@@ -18,9 +18,11 @@ router.post("/", postAbout);
 router.post("/",  postSkill);
 router.post("/",  postService);
 router.get('/',getAbout);
-// router.get('/',getHome);
+router.get('/',getHome);
 // router.get('/',getSkill);
 // router.get('/',getService);
+router.put('/',updateHome,
+)
 
 
 export default router;

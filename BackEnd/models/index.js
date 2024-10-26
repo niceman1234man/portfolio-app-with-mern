@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const home = new mongoose.Schema(
   {
-    greating: {
+    greeting: {
       type: String,
     },
     title: {
