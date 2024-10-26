@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function Information() {
-  const [home, setHome] = useState({ greating: "", title: "" });
-  const [about, setAbout] = useState({ photo: "", description: "" });
+  const [home, setHome] = useState({ greeting: "Hello !!!", title: "Full Stack Developer" });
+  const [about, setAbout] = useState({ photo: "", description: "I am a computer scientist currently specializing in full stack development, primarily using the MERN stack (MongoDB, Express.js, React, and Node.js). My focus is on web development, where I leverage my skills to create dynamic and responsive applications." });
   const [skill, setSkill] = useState({ skillName: "", pic: "" });
   const [service, setService] = useState({ serviceName: "", desc: "" });
+  const { id } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/home", home)
+      .post("http://localhost:9000/home/me", home)
       .then((result) => {
         console.log(result);
         alert("Home added successfully");
@@ -21,15 +23,36 @@ function Information() {
       });
   };
 
+  useEffect(() => {
+    axios.get("http://localhost:9000/home/me")
+      .then((result) => {
+        setHome(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(()=>{
+   axios.get('http://localhost/9000/about/me').then((result)=>{
+    setAbout(result.data);
+   }).catch((error)=>{
+    console.log(error);
+   })
+  },[])
+   
+
+
+
   const submitAbout = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/home", about)
+      .post("http://localhost:9000/me", about)
       .then((result) => {
         console.log(result);
-        alert("About addedd succesfully");
+        alert("About added successfully");
       })
-      .then((error) => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -37,7 +60,7 @@ function Information() {
   const submitSkill = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/home", skill)
+      .post("http://localhost:9000/me", skill)
       .then((result) => {
         console.log(result);
         alert("Skill added successfully");
@@ -50,7 +73,7 @@ function Information() {
   const submitService = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/home", service)
+      .post("http://localhost:9000/services", service)
       .then((result) => {
         console.log(result);
         alert("New Service added successfully");
@@ -60,44 +83,54 @@ function Information() {
       });
   };
 
-  const handleHome = (e) => {
+  const handleHomeChange = (e) => {
     const { name, value } = e.target;
     setHome((prev) => ({ ...prev, [name]: value }));
   };
-  const handleAbout = (e) => {
+
+  const handleAboutChange = (e) => {
     const { name, value } = e.target;
-    setAbout((prev) => ({ ...prev, [name]: value }));
+    if (name === "photo") {
+      setAbout((prev) => ({ ...prev, [name]: e.target.files[0] }));
+    } else {
+      setAbout((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
-  const handleSkill = (e) => {
+  const handleSkillChange = (e) => {
     const { name, value } = e.target;
-    setSkill((prev) => ({ ...prev, [name]: value }));
+    if (name === "pic") {
+      setSkill((prev) => ({ ...prev, [name]: e.target.files[0] }));
+    } else {
+      setSkill((prev) => ({ ...prev, [name]: value }));
+    }
   };
-  const handleService = (e) => {
+
+  const handleServiceChange = (e) => {
     const { name, value } = e.target;
     setService((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <div className="w-[1240px] h-screen mx-auto ">
+    <div className="w-[1240px] h-screen mx-auto">
       <div className="py-4 w-full mx-auto">
         <h1 className="font-bold text-center p-3">Home</h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Greatting : Hello !!"
+            placeholder="Greeting: Hello !!"
             className="p-2 border border-black my-2"
-            name="greating"
+            name="greeting"
             value={home.greeting}
-            onChange={handleHome}
+            onChange={handleHomeChange}
           />
           <input
             type="text"
-            placeholder="Title: like Full stack developer..."
+            placeholder="Title: e.g., Full Stack Developer..."
             className="p-2 border border-black my-2"
             value={home.title}
             name="title"
-            onChange={handleHome}
+            onChange={handleHomeChange}
           />
           <button type="submit" className="p-2 my-2 bg-cyan-600">
             Save
@@ -110,23 +143,24 @@ function Information() {
         <form className="flex flex-col" onSubmit={submitAbout}>
           <input
             type="file"
-            placeholder="Greatting"
             name="photo"
             className="p-2 border border-black my-2"
-            onChange={handleAbout}
+            value={about.photo}
+            onChange={handleAboutChange}
           />
           <textarea
-            type="text"
             placeholder="Description about Me"
             name="description"
             className="p-2 border border-black my-2"
-            onChange={handleAbout}
+            value={about.description}
+            onChange={handleAboutChange}
           />
           <button type="submit" className="p-2 my-2 bg-cyan-600">
             Save
           </button>
         </form>
       </div>
+
       <div className="py-4 w-full">
         <h1 className="font-bold text-center p-3">Skills</h1>
         <form className="flex flex-col" onSubmit={submitSkill}>
@@ -135,20 +169,20 @@ function Information() {
             placeholder="Skill's Name"
             name="skillName"
             className="p-2 border border-black my-2"
-            onChange={handleSkill}
+            onChange={handleSkillChange}
           />
           <input
             type="file"
-            placeholder="Description"
             name="pic"
             className="p-2 border border-black my-2"
-            onChange={handleSkill}
+            onChange={handleSkillChange}
           />
           <button type="submit" className="p-2 my-2 bg-cyan-600">
             Save
           </button>
         </form>
       </div>
+
       <div className="py-4 w-full">
         <h1 className="font-bold text-center p-3">Services</h1>
         <form className="flex flex-col" onSubmit={submitService}>
@@ -157,26 +191,26 @@ function Information() {
             placeholder="Service Name"
             name="serviceName"
             className="p-2 border border-black my-2"
-            onChange={handleService}
+            onChange={handleServiceChange}
           />
           <textarea
-            type="text"
             placeholder="Description"
             name="desc"
             className="p-2 border border-black my-2"
-            onChange={handleService}
+            onChange={handleServiceChange}
           />
           <button type="submit" className="p-2 my-2 bg-cyan-600">
             Save
           </button>
         </form>
       </div>
+
       <div className="py-4 w-full">
         <h1 className="font-bold text-center p-3">Contacts</h1>
         <form className="flex flex-col">
           <input
             type="text"
-            placeholder="Greatting"
+            placeholder="Greeting"
             className="p-2 border border-black my-2"
           />
           <input
@@ -192,4 +226,5 @@ function Information() {
     </div>
   );
 }
+
 export default Information;
