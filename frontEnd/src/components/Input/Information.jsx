@@ -12,10 +12,10 @@ function Information() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/home/me", home)
+      .put(`http://localhost:9000/home${id}`, home)
       .then((result) => {
         console.log(result);
-        alert("Home added successfully");
+        alert("Home updated successfully");
       })
       .catch((error) => {
         console.error(error);
@@ -24,7 +24,7 @@ function Information() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:9000/home/me")
+    axios.get("http://localhost:9000/home")
       .then((result) => {
         setHome(result.data);
       })
@@ -133,7 +133,7 @@ function Information() {
             onChange={handleHomeChange}
           />
           <button type="submit" className="p-2 my-2 bg-cyan-600">
-            Save
+            Update
           </button>
         </form>
       </div>
