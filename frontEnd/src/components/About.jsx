@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function About() {
 
-  const [about, setAbout] = useState({ photo: "", description: "" });
+  const [about, setAbout] = useState({ photo: me2, description: "I am a computer scientist currently specializing in full stack development, primarily using the MERN stack (MongoDB, Express.js, React, and Node.js). My focus is on web development, where I leverage my skills to create dynamic and responsive applications." });
   useEffect(()=>{
     const result=axios.get('http://localhost/9000').then(()=>{
       setAbout(result.data.data);
