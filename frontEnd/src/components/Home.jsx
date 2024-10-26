@@ -6,14 +6,14 @@ function Home() {
   const [home, setHome] = useState({ greeting: "Hi!", title: "Full Stack Developer" });
 
   useEffect(() => {
-    axios.get('http://localhost:9000')
+    axios.get('http://localhost:9000/home/me')
       .then((result) => {
         setHome(result.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []); // Empty array to run only once on mount
+  }, []);
 
   return (
     <div className='bg-black w-full py-16 mt-0 h-screen'>
