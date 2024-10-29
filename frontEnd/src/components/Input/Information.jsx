@@ -12,7 +12,7 @@ function Information() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:9000/home${id}`, home)
+      .put('http://localhost:9000/home', home)
       .then((result) => {
         console.log(result);
         alert("Home updated successfully");
@@ -47,7 +47,7 @@ function Information() {
   const submitAbout = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/me", about)
+      .post("http://localhost:9000/home", about)
       .then((result) => {
         console.log(result);
         alert("About added successfully");
@@ -60,7 +60,7 @@ function Information() {
   const submitSkill = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/me", skill)
+      .post("http://localhost:9000/home", skill)
       .then((result) => {
         console.log(result);
         alert("Skill added successfully");
