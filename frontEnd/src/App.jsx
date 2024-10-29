@@ -9,6 +9,10 @@ import Projects from './components/Projects';
 import About from './components/About';
 import Service from './components/Service';
 import Information from './components/Input/Information';
+import UpdateHome from './components/updateHome';
+import UpdateAbout from './components/UpdateAbout'
+import UpdateSkill from './components/updateSkill';
+import UpdateService from './components/updateService';
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
           </div>
         } />
         <Route path='/add-info' element={<Information />} />
+        <Route path='/update-home' element={<UpdateHome/>}/>
+        <Route path='/update-about' element={< Update_about/>}/>
+        <Route path='/update-skill' element={<UpdateSkill/>}/>
+        <Route path='/update-service' element={< UpdateService/>}/>
       </Routes>
     </>
   );
