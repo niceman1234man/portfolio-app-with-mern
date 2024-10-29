@@ -6,7 +6,7 @@ function Home() {
   const [home, setHome] = useState({ greeting: "Hi!", title: "Full Stack Developer" });
 
   useEffect(() => {
-    axios.get('http://localhost:9000/home/me')
+    axios.get('http://localhost:9000/home')
       .then((result) => {
         setHome(result.data);
       })
