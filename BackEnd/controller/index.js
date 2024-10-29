@@ -124,16 +124,14 @@ export const updateAbout=async(req,res)=>{
 }
 
 export const updateHome = async (req, res) => {
-  const { id } = req.params;
   const updatedHome = req.body;
 
   try {
-    Home.findOneAndUpdate
-    const result = await Home.findOneAndUpdate(id, updatedHome, { new: true });
+    
+    const result = await Home.findOneAndUpdate( updatedHome, { new: true });
     if (!result) {
       return res.status(404).json({ success: false, message: "Home not found" });
     }
-
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     console.error(error); 
