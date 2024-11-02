@@ -32,7 +32,7 @@ function App() {
         } />
         <Route path='/add-info' element={<Information />} />
         <Route path='/update-home' element={<UpdateHome/>}/>
-        <Route path='/update-about' element={< Update_about/>}/>
+        <Route path='/update-about' element={< UpdateAbout/>}/>
         <Route path='/update-skill' element={<UpdateSkill/>}/>
         <Route path='/update-service' element={< UpdateService/>}/>
       </Routes>
