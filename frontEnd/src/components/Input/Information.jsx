@@ -3,8 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function Information() {
-  const [home, setHome] = useState({ greeting: "Hello !!!", title: "Full Stack Developer" });
-  const [about, setAbout] = useState({ photo: "", description: "I am a computer scientist currently specializing in full stack development, primarily using the MERN stack (MongoDB, Express.js, React, and Node.js). My focus is on web development, where I leverage my skills to create dynamic and responsive applications." });
+  const [home, setHome] = useState({ greeting: "", title: "" });
+  const [about, setAbout] = useState({ photo: "", description: "" });
   const [skill, setSkill] = useState({ skillName: "", pic: "" });
   const [service, setService] = useState({ serviceName: "", desc: "" });
   const { id } = useParams();
@@ -22,9 +22,9 @@ function Information() {
   const submitSkill = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:9000/home", skill)
+      .post("http://localhost:9000/home/s", skill)
       .then((result) => {
-        console.log(result);
+        console.log(skill);
         alert("Skill added successfully");
       })
       .catch((error) => {
@@ -57,6 +57,15 @@ function Information() {
     }
   };
 
+  const handleAboutChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "pic") {
+      setSkill((prev) => ({ ...prev, [name]: e.target.files[0] }));
+    } else {
+      setSkill((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
   const handleServiceChange = (e) => {
     const { name, value } = e.target;
     setService((prev) => ({ ...prev, [name]: value }));
@@ -66,14 +75,14 @@ function Information() {
     <div className="w-[1240px] h-screen mx-auto">
       <div className="py-4 w-full mx-auto">
         <h1 className="font-bold text-center p-3">Home</h1>
-        <form className="flex flex-col" onSubmit={handleSubmit}>
+        <form className="flex flex-col" >
           <input
             type="text"
             placeholder="Greeting: Hello !!"
             className="p-2 border border-black my-2"
             name="greeting"
             value={home.greeting}
-            onChange={handleHomeChange}
+            // onChange={handleHomeChange}
           />
           <input
             type="text"
@@ -81,7 +90,7 @@ function Information() {
             className="p-2 border border-black my-2"
             value={home.title}
             name="title"
-            onChange={handleHomeChange}
+            // onChange={handleHomeChange}
           />
           <button type="submit" className="p-2 my-2 bg-cyan-600">
             Update
@@ -91,13 +100,13 @@ function Information() {
 
       <div className="py-4 w-full">
         <h1 className="font-bold text-center p-3">About Me</h1>
-        <form className="flex flex-col" onSubmit={submitAbout}>
+        <form className="flex flex-col" >
           <input
             type="file"
             name="photo"
             className="p-2 border border-black my-2"
             value={about.photo}
-            onChange={handleAboutChange}
+            // onChange={handleAboutChange}
           />
           <textarea
             placeholder="Description about Me"
