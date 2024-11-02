@@ -15,11 +15,11 @@ const router = express.Router();
 
 router.post("/",  postHome);
 router.post("/", postAbout);
-router.post("/",  postSkill);
+router.post("/s",  postSkill);
 router.post("/",  postService);
 router.get('/',getAbout);
-router.get('/',getHome);
-// router.get('/',getSkill);
+router.get('/h',getHome);
+router.get('/skill',getSkill);
 // router.get('/',getService);
 router.put('/',updateHome,
 )
