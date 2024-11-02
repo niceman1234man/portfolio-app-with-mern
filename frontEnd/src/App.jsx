@@ -10,7 +10,7 @@ import About from './components/About';
 import Service from './components/Service';
 import Information from './components/Input/Information';
 import UpdateHome from './components/updateHome';
-import UpdateAbout from './components/UpdateAbout'
+import UpdateAbout from './components/Update_About'
 import UpdateSkill from './components/updateSkill';
 import UpdateService from './components/updateService';
 
