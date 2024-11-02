@@ -20,7 +20,7 @@ router.post("/",  postService);
 router.get('/',getAbout);
 router.get('/h',getHome);
 router.get('/skill',getSkill);
-// router.get('/',getService);
+router.get('/',getService);
 router.put('/',updateHome,
 )
 
