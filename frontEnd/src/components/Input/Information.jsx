@@ -9,53 +9,15 @@ function Information() {
   const [service, setService] = useState({ serviceName: "", desc: "" });
   const { id } = useParams();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .put('http://localhost:9000/home', home)
-      .then((result) => {
-        console.log(result);
-        alert("Home updated successfully");
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Error adding home");
-      });
-  };
+ 
+ 
 
-  useEffect(() => {
-    axios.get("http://localhost:9000/home")
-      .then((result) => {
-        setHome(result.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  useEffect(()=>{
-   axios.get('http://localhost/9000/about/me').then((result)=>{
-    setAbout(result.data);
-   }).catch((error)=>{
-    console.log(error);
-   })
-  },[])
+  
    
 
 
 
-  const submitAbout = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:9000/home", about)
-      .then((result) => {
-        console.log(result);
-        alert("About added successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  
 
   const submitSkill = (e) => {
     e.preventDefault();
@@ -83,19 +45,8 @@ function Information() {
       });
   };
 
-  const handleHomeChange = (e) => {
-    const { name, value } = e.target;
-    setHome((prev) => ({ ...prev, [name]: value }));
-  };
 
-  const handleAboutChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "photo") {
-      setAbout((prev) => ({ ...prev, [name]: e.target.files[0] }));
-    } else {
-      setAbout((prev) => ({ ...prev, [name]: value }));
-    }
-  };
+
 
   const handleSkillChange = (e) => {
     const { name, value } = e.target;
