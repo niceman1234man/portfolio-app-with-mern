@@ -8,21 +8,19 @@ function About() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchAboutData = async () => {
-      try {
-        const response = await axios.get('http://localhost:9000/home');
-        // Assuming response.data contains the expected structure
-        setAbout(response.data);
-        console.log("API result: ", response.data);
-      } catch (error) {
-        console.error("Server fetching error:", error);
-        setError('Failed to load about information.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAboutData();
+    axios.get('http://localhost:9000/home')
+      .then((response) => {
+        if (response.data.data && response.data.data.length > 0) {
+          setAbout(response.data.data[0]); // Accessing the first object in the array
+        } else {
+          setError("No data available.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("An error occurred while fetching data.");
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
@@ -32,24 +30,32 @@ function About() {
   if (error) {
     return <div className="text-red-500 text-center">{error}</div>;
   }
+
+  const handleResumeClick = () => {
+    window.open('https://docs.google.com/document/d/1oaJCZY_P9t5TjCnrYuadG5bFn3quQYRhm1lyHMdzzGE/edit?tab=t.0', '_blank');
+  };
+
   return (
     <div className='bg-white py-16 h-screen'>
       <div className='max-w-[1240px] mx-auto'>
         <div className='mx-4 grid md:grid-cols-2 gap-8'>
           <div className='w-[90%] p-4 flex items-center justify-center rounded-lg mx-auto'>
             <img 
-              src={about.photo} 
-              alt="Profile" 
+              src={about.photo || me2} 
+              alt="Profile of the user" 
               className='w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full border-8 border-fuchsia-950' 
             />
           </div>
           <div className='text-black p-2'>
             <h2 className='text-[30px] p-2'>About Me</h2>
-            <p className='text-xl font-semibold lg:text-xl'>
-              {about.description}
+            <p className=' lg:text-md'>
+              {about.description || "No description available."}
             </p>
             <div className='flex items-center justify-center mt-4'>
-              <button className='bg-[#00df9a] p-2 rounded-md w-[200px] text-medium font-semibold font-sans'>
+              <button 
+                className='bg-[#00df9a] p-2 rounded-md w-[200px] text-medium font-semibold font-sans'
+                onClick={handleResumeClick}
+              >
                 Resume
               </button>
             </div>
