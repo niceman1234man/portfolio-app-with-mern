@@ -6,9 +6,10 @@ function Home() {
   const [home, setHome] = useState({ greeting: "Hi!", title: "Full Stack Developer" });
 
   useEffect(() => {
-    axios.get('http://localhost:9000/home')
+    axios.get('http://localhost:9000/home/h')
       .then((result) => {
-        setHome(result.data);
+        console.log(result);
+        setHome(result.data.data[0]);
       })
       .catch((error) => {
         console.log(error);
@@ -19,7 +20,7 @@ function Home() {
     <div className='bg-black w-full py-16 mt-0 h-screen'>
       <div className='max-w-[1240px] mx-auto flex items-center justify-center'>
         <div className='text-white'>
-          <h2 className='text-[30px] p-2'>{home.greeting}</h2>
+          <h2 className='text-[30px] p-2 font-semibold'>{home.greeting}!</h2>
           <p className='text-3xl font-semibold md:text-4xl lg:text-5xl font-serif'>
             <Typewriter
               words={["I'm Yihunie Tarekegn", home.title]}
