@@ -33,14 +33,13 @@ export const postAbout = async (req, res) => {
 export const postSkill = async (req, res) => {
   const skill = req.body;
   const newSkill = new Skill(skill);
+  
   try {
     await newSkill.save();
-    res
-      .status(201)
-      .json({ success: true, message: "new Skill added succesfully" });
+    res.status(201).json({ success: true, message: "New skill added successfully" });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: "server error" });
+    console.error('Error saving skill:', error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
