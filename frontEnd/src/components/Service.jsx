@@ -1,53 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Service() {
-  return (
-    <div className='w-full bg-slate-500 py-16 text-white font-semibold'>
-    <div className='max-w-[1240px] mx-auto' >
-    <h1 className='text-center text-3xl'>My Services</h1>
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        <div className='w-full shadow-xl py-8 px-2'>
-            <h1 className='text-center font-bold text-2xl py-4'>Title</h1>
-            <p className='p-2'>Create stunning text effects with our font 
-                style text effect generator. Choose from a variety 
-                of fonts and effortlessly transform your text into a 
-                3D masterpiece. Add texture and depth to your words, 
-                whether you want to evoke the wildness of a
-                 leopard or the charm of a zoo full of animals.</p>
-                 
-               
-        
-        </div>
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-        <div className='w-full shadow-xl py-8 px-2'>
-            <h1 className='text-center font-bold text-2xl py-4'>Title</h1>
-            <p className='p-2'>Create stunning text effects with our font 
-                style text effect generator. Choose from a variety 
-                of fonts and effortlessly transform your text into a 
-                3D masterpiece. Add texture and depth to your words, 
-                whether you want to evoke the wildness of a
-                 leopard or the charm of a zoo full of animals.</p>
-                
-               
-        
-        </div>
-        <div className='w-full shadow-xl py-8 px-2'>
-            <h1 className='text-center font-bold text-2xl py-4'>Title</h1>
-            <p className='p-2'>Create stunning text effects with our font 
-                style text effect generator. Choose from a variety 
-                of fonts and effortlessly transform your text into a 
-                3D masterpiece. Add texture and depth to your words, 
-                whether you want to evoke the wildness of a
-                 leopard or the charm of a zoo full of animals.</p>
-                
-               
-        
-        </div>
-    </div>
-    </div>
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const result = await axios.get("http://localhost:9000/home/service");
+                setServices(result.data.data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-</div>
-  )
+        fetchServices();
+    }, []);
+
+    if (loading) {
+        return <div className="text-center">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center text-red-500">Error: {error}</div>;
+    }
+
+    return (
+        <div className='w-full bg-slate-500 py-16 text-white font-semibold'>
+            <div className='max-w-[1240px] mx-auto'>
+                <h1 className='text-center text-3xl'>My Services</h1>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+                    {services.map(service => (
+                        <div className='w-full shadow-xl py-8 px-2' key={service._id}>
+                            <h1 className='text-center font-bold text-2xl py-4'>{service.name}</h1>
+                            <p className='p-2'>{service.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default Service
+export default Service;
