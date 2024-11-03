@@ -19,7 +19,7 @@ router.post("/s",  postSkill);
 router.post("/serv",  postService);
 router.get('/',getAbout);
 router.get('/h',getHome);
-router.get('/skill',getSkill);
+router.get('/skill',getSkill);  
 router.get('/service',getService);
 router.put('/',updateHome,
 )
