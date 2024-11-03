@@ -30,8 +30,9 @@ function Home() {
             />
           </p>
           <div className='flex items-center justify-center mt-6 mx-auto'>
-            <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 py-2 mx-auto text-black'>
-              My Works
+            <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 py-2 mx-auto text-black'><a href="https://github.com/niceman1234man?tab=repositories">
+
+              My Works</a>
             </button>
           </div>
         </div>
