@@ -16,7 +16,7 @@ const router = express.Router();
 router.post("/",  postHome);
 router.post("/", postAbout);
 router.post("/s",  postSkill);
-router.post("/",  postService);
+router.post("/serv",  postService);
 router.get('/',getAbout);
 router.get('/h',getHome);
 router.get('/skill',getSkill);
