@@ -29,7 +29,7 @@ const About = mongoose.model("About", about);
 const skills = new mongoose.Schema(
   {
     photo: {
-      type: String,
+      type: Object,
     },
     name: {
       type: String,
