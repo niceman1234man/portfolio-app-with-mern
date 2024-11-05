@@ -8,21 +8,19 @@ import {
   getHome,
   getSkill,
   getService,
-updateHome,
+  updateHome,
 } from "../controller/index.js";
 
 const router = express.Router();
 
-router.post("/",  postHome);
+router.post("/", postHome);
 router.post("/", postAbout);
-router.post("/s",  postSkill);
-router.post("/serv",  postService);
-router.get('/',getAbout);
-router.get('/h',getHome);
-router.get('/skill',getSkill);  
-router.get('/service',getService);
-router.put('/',updateHome,
-)
-
+router.post("/s", postSkill);
+router.post("/serv", postService);
+router.get("/", getAbout);
+router.get("/h", getHome);
+router.get("/skill", getSkill);
+router.get("/service", getService);
+router.put("/", updateHome);
 
 export default router;
