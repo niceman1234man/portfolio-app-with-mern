@@ -1,4 +1,5 @@
 import React ,{useState} from 'react'
+import axios from 'axios';
 
 function Skill() {
   
@@ -7,15 +8,11 @@ function Skill() {
         e.preventDefault();
         
         const formData = new FormData();
-        formData.append('photo', skill.photo); // This should be a File object
+        formData.append('image', skill.photo); // This should be a File object
         formData.append('name', skill.name);   // This should be a string
     
         axios
-          .post("http://localhost:9000/home/s", formData, {
-              headers: {
-                  'Content-Type': 'multipart/form-data'
-              }
-          })
+          .post("http://localhost:9000/home/s", formData)
           .then((result) => {
               console.log(result);
               alert("Skill added successfully");
@@ -41,7 +38,7 @@ function Skill() {
       <label htmlFor="photo" className="my-2">Upload Photo:</label>
       <input
         type="file"
-        name="photo"
+        name="image"
         className="p-2 border border-black"
         onChange={handleSkillChange}
       />
