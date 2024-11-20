@@ -8,10 +8,21 @@ function Home() {
     const { name, value } = e.target;
     setHome((prev) => ({ ...prev, [name]: value }));
   };
+
+
+  const onHandleSubmit=(e)=>{
+    e.preventDefault()
+    axios.post('http://localhost:9000',home).then((result)=>{
+      console.log(result);
+    }).catch((error)=>{
+      console.log(error);
+    })
+    
+  }
   return (
     <div className="py-4 w-full mx-auto">
     <h1 className="font-bold text-center p-3">Home</h1>
-    <form className="flex flex-col" onSubmit={(e) => e.preventDefault()}>
+    <form className="flex flex-col" onSubmit={onHandleSubmit}>
       <input
         type="text"
         placeholder="Greeting: Hello !!"
