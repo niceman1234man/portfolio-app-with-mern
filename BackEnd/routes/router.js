@@ -10,12 +10,13 @@ import {
   getService,
   updateHome,
 } from "../controller/index.js";
+import { upload } from "../FileMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", postHome);
+router.post("/",upload.single('image'), postHome);
 router.post("/", postAbout);
-router.post("/s", postSkill);
+router.post("/s", upload.single('image'),postSkill);
 router.post("/serv", postService);
 router.get("/", getAbout);
 router.get("/h", getHome);
