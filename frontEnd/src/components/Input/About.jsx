@@ -11,7 +11,7 @@ function About() {
         formData.append('image',photo);
         formData.append('description',about);
         try {
-          axios.post('http://localhost:9000/home/s',formData).then((result)=>{
+          axios.post('http://localhost:9000/home',formData).then((result)=>{
             console.log(result);
           })
         } catch (error) {
