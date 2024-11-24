@@ -15,7 +15,7 @@ import { upload } from "../FileMiddleware.js";
 const router = express.Router();
 
 router.post("/",upload.single('image'), postHome);
-router.post("/", postAbout);
+router.post("/about", postAbout);
 router.post("/s", upload.single('image'),postSkill);
 router.post("/serv", postService);
 router.get("/", getAbout);
